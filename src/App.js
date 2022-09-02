@@ -6,6 +6,11 @@ const calculateNumbers = [7, 8, 9, 4, 5, 6, 1, 2, 3];
 const calculateBottomRow = [0, "."];
 const calculateOperations = ["/", "*", "-", "+", "="];
 
+// Still to do:
+//  * include error logic using getInputType()
+//  * have inputs update as calcString without resetting calcString
+//  * include functionality for +/-, %, .
+
 const App = () => {
   const [total, setTotal] = useState(0);
   const [selectedNumber, setSelectedNumber] = useState(null);
