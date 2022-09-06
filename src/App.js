@@ -16,55 +16,14 @@ const App = () => {
   const [selectedNumber, setSelectedNumber] = useState(null);
   const [selectedOperation, setOperation] = useState(null);
   const [selectedFunction, setFunction] = useState(null);
-  const [inputs, setInputs] = useState(null);
+  const [calcString, setCalcString] = useState("");
 
-  // to be used later for error checking logic
-  const getInputType = (d) => {
-    if (
-      calculateNumbers.includes(d) ||
-      ["1", "2", "3", "4", "5", "6", "7", "8", "9"].includes(d)
-    ) {
-      return "nonZeroNumber";
-    } else if (d === 0 || d === "0") {
-      return "zeroNumber";
-    } else if (d === "AC") {
-      return "reset";
-    } else if (d === "+/-") {
-      return "changeSign";
-    } else if (d === "%") {
-      return "percentage";
-    } else if (d === "/") {
-      return "divide";
-    } else if (d === "x") {
-      return "multiply";
-    } else if (d === "-") {
-      return "subtract";
-    } else if (d === "+") {
-      return "add";
-    } else if (d === "=") {
-      return "equals";
-    } else if (d === ".") {
-      return "decimalPoint";
-    }
-  };
 
-  let calcString = "";
   let stringTypes = [];
 
   const updateString = (e, inputType) => {
-    const currType = getInputType(e);
-    stringTypes.push(currType);
-
-    const priorVal = calcString[calcString.length - 1];
-    const priorType = getInputType(priorVal);
-
-    calcString += e;
-    // setInputs(calcString);
-    // console.log("e", e);
-    // console.log("inputType", inputType);
-    // console.log(priorVal, priorType);
-    // console.log(e, currType);
-    console.log("calcString", calcString);
+    setCalcString(calcString + e);
+    console.log("calcString", calcString + e);
   };
 
   const calculateTotal = () => {
@@ -78,27 +37,27 @@ const App = () => {
       newTotal = eval(`${totalString}${calcString}`);
     }
 
-    calcString = "";
     stringTypes = [];
     setSelectedNumber(null);
     setOperation(null);
     setFunction(null);
     setTotal(newTotal);
+    setCalcString("");
   };
 
   const resetTotal = () => {
     console.log("reset");
-    calcString = "";
     stringTypes = [];
     setSelectedNumber(null);
     setOperation(null);
     setFunction(null);
     setTotal(0);
+    setCalcString("");
   };
 
   return (
     <div className="App">
-      <h6 className="inputs">{inputs}</h6>
+      <h6 className="inputs">{calcString}</h6>
       <h1 className="total">{total}</h1>
       <div className="buttonsWrapper">
         <div className="nonoperationsWrapper">
